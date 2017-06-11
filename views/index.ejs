@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <style>
+        * {
+            margin: 8px;
+        }
+    </style>
+</head>
+<body>
+<h1><%= title %></h1>
+<div id="content">
+    <input type="text" class="top"><br>
+    <input type="text" class="bottom" name="content" required placeholder="POST"><br>
+</div>
+
+<input type="submit" value="GET" id="GET">
+<input type="submit" value="POST" id="POST">
+</body>
+</html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+//      $('#GET').click(function () {
+//          $.ajax({
+//              method:'GET',
+//              url:'/get'
+//          }).success((data)=>{
+//             $('.top').css({
+//                height:'150px'
+//              })
+//      }).error((err)=>{
+//          console.log(err);
+//      })
+//      })
+
+    $('#GET').click(function () {
+        $.ajax({
+            method: 'GET',
+            url: '/get'
+        }).success((data) => {
+            window.location.href = '/get'
+        }).error((err) => {
+            console.log(err);
+        })
+    })
+
+      $('#POST').click(function () {
+          $.ajax({
+              method:'GET',
+              url:'/POST',
+          }).success(data=>{
+              if(data == 'POST'){
+                  window.location.href = '/post'
+              }
+          }).error(err=>{
+              console.log(err);
+          })
+      })
+
+    $('#POST').click(function () {
+        $.ajax({
+            method: 'POST',
+            url: '/post',
+            data:{
+                name:$('#content').find('[name="content"]').val(),
+            },
+            headers:{'Content-Type':'application/x-www-form-urlencoded'}
+    }).success((data) => {
+            if(data == 'POST'){
+                if(data == 'POST'){
+                    window.location.href = '/post'
+                }
+            }
+        }).error((err) => {
+            console.log(err);
+        })
+    })
+
+</script>
